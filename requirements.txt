@@ -1,0 +1,2 @@
+django-phonenumbers-field[phonenumberslite]
+Django==4.0
