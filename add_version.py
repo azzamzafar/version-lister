@@ -46,8 +46,10 @@ def main():
     """
     # check if venv is active
     
-    if not os.system('env | grep ^"VIRTUAL_ENV=" | wc -l'):
+    # if not os.system('env | grep ^"VIRTUAL_ENV=" | wc -l'):
+    if sys.prefix==sys.base_prefix:
         print("Aborted\nNo virtual environments active!!!",file=sys.stderr)
+    
     # Create a dicionary of installed packages and their versions 
     os.system('pip freeze >> temp')
     packages={}
