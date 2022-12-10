@@ -51,7 +51,7 @@ def main():
         print("Aborted\nNo virtual environments active!!!",file=sys.stderr)
     
     # Create a dicionary of installed packages and their versions 
-    os.system('pip freeze >> temp')
+    os.system('pip list --format=freeze >> temp')
     packages={}
     with open('./temp','r') as versionfile:
         for line in versionfile.readlines():
@@ -74,6 +74,7 @@ def main():
                 if val!=None:
                     newreq.write(f'{key}=={val}\n')
         os.system('rm temp && mv ./newreq ./requirements.txt --force')
+        print(f'Requirements file recreated with locked dependencies present in system\n!!!')
 
     else:
         """
@@ -87,10 +88,7 @@ def main():
         with open('./requirements.txt','a+') as req_file:
             for key,val in packages.items():
                 req_file.write(f'{key}=={val}\n')
-        
+        os.system('rm temp')
+        print('requirements file created from scratch with all packages installed in env!!!\n') 
 
-  
-
-if __name__=="__main__":
-    
-    main()
+ 
